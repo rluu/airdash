@@ -2,6 +2,7 @@ plugins {
 	id 'org.springframework.boot' version '2.1.9.RELEASE'
 	id 'io.spring.dependency-management' version '1.0.8.RELEASE'
 	id 'java'
+    id 'eclipse'
 }
 
 group = 'io.github.rluu'
@@ -21,6 +22,9 @@ repositories {
 
 ext {
 	set('springBootAdminVersion', "2.1.5")
+    set('apacheCommonsLang3Version', "3.9")
+    set('log4jVersion', "2.12.1")
+    set('postgresqlJdbcDriverVersion', "42.2.8")
 }
 
 dependencies {
@@ -33,6 +37,11 @@ dependencies {
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
+
+    compile "org.apache.commons:commons-lang3:${apacheCommonsLang3Version}"
+    compile "org.apache.logging.log4j:log4j-api:${log4jVersion}"
+    compile "org.apache.logging.log4j:log4j-core:${log4jVersion}"
+    compile "org.postgresql:postgresql:${postgresqlJdbcDriverVersion}"
 }
 
 dependencyManagement {
