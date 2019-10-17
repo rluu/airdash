@@ -1,0 +1,5 @@
+
+
+CREATE SEQUENCE users_seq 
+	START 1
+	INCREMENT 1;
