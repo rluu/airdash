@@ -20,6 +20,13 @@ import io.github.rluu.airdash.exception.ResourceNotFoundException;
 import io.github.rluu.airdash.model.User;
 import io.github.rluu.airdash.repository.UserRepository;
 
+/*
+
+// rluu: For now, don't include this stuff.  We probably don't want clients to
+// be doing anything with with users.  I've kept this code here as an example so
+// we can change it for any other API services that I might want.
+
+
 @RestController
 @RequestMapping("/api/v1")
 public class UserController {
@@ -57,3 +64,4 @@ public class UserController {
     }
 
 }
+ */
