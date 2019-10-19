@@ -6,3 +6,8 @@ CREATE SEQUENCE users_seq
 CREATE SEQUENCE role_seq 
 	START 1
 	INCREMENT 1;
+
+CREATE SEQUENCE email_verification_seq 
+	START 1
+	INCREMENT 1;
+

@@ -15,7 +15,7 @@ import de.codecentric.boot.admin.server.config.AdminServerProperties;
 
 @Configuration
 @EnableWebSecurity
-class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	private final AdminServerProperties adminServer;
 	 
@@ -59,4 +59,5 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .key(UUID.randomUUID().toString())
                 .tokenValiditySeconds(1209600);
     }
+    
 }
