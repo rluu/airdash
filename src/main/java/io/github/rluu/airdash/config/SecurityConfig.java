@@ -2,18 +2,17 @@ package io.github.rluu.airdash.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+
+import io.github.rluu.airdash.service.CustomUserDetailsService;
 
 @Configuration
 public class SecurityConfig {
-
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        //PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
-        PasswordEncoder passwordEncoder = NoOpPasswordEncoder.getInstance();
-        return passwordEncoder;
-    }
 
 //    @Bean
 //    public UserDetailsService userDetailsService() {
@@ -36,4 +35,18 @@ public class SecurityConfig {
 //        return userDetailsManager;
 //    }
 
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        //PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
+        PasswordEncoder passwordEncoder = NoOpPasswordEncoder.getInstance();
+        return passwordEncoder;
+    }
+    
+
+//
+//    @Bean
+//    public UserDetailsService userDetailsService(CustomUserDetailsService userService) {
+//        return userService;
+//    }
+// 
 }

@@ -72,8 +72,8 @@ public class User implements UserDetails {
 	@Column(name="credentials_expired_ind")
 	private boolean credentialsExpiredInd;
 	
-	@Column(name="enabled_ind")
-	private boolean enabledInd;
+	@Column(name="enable_ind")
+	private boolean enableInd;
 	
     @ManyToMany
     @JoinTable(name = "users_role", 
@@ -201,12 +201,12 @@ public class User implements UserDetails {
         this.credentialsExpiredInd = credentialsExpiredInd;
     }
 
-    public boolean isEnabledInd() {
-        return enabledInd;
+    public boolean isEnableInd() {
+        return enableInd;
     }
 
-    public void setEnabledInd(boolean enabledInd) {
-        this.enabledInd = enabledInd;
+    public void setEnableInd(boolean enableInd) {
+        this.enableInd = enableInd;
     }
 
     public Set<Role> getRoles() {
@@ -229,7 +229,7 @@ public class User implements UserDetails {
         result = prime * result + (deleteInd ? 1231 : 1237);
         result = prime * result + ((emailAddress == null) ? 0 : emailAddress.hashCode());
         result = prime * result + (emailAddressVerifiedInd ? 1231 : 1237);
-        result = prime * result + (enabledInd ? 1231 : 1237);
+        result = prime * result + (enableInd ? 1231 : 1237);
         result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
         result = prime * result + ((id == null) ? 0 : id.hashCode());
         result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
@@ -275,7 +275,7 @@ public class User implements UserDetails {
             return false;
         if (emailAddressVerifiedInd != other.emailAddressVerifiedInd)
             return false;
-        if (enabledInd != other.enabledInd)
+        if (enableInd != other.enableInd)
             return false;
         if (firstName == null) {
             if (other.firstName != null)
@@ -342,7 +342,7 @@ public class User implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return enabledInd;
+        return enableInd;
     }
 
     @Override
@@ -352,7 +352,7 @@ public class User implements UserDetails {
                 + ", emailAddressVerifiedInd=" + emailAddressVerifiedInd + ", createDttm=" + createDttm
                 + ", updateDttm=" + updateDttm + ", deleteDttm=" + deleteDttm + ", deleteInd=" + deleteInd
                 + ", accountExpiredInd=" + accountExpiredInd + ", accountLockedInd=" + accountLockedInd
-                + ", credentialsExpiredInd=" + credentialsExpiredInd + ", enabledInd=" + enabledInd + ", roles=" + roles
+                + ", credentialsExpiredInd=" + credentialsExpiredInd + ", enableInd=" + enableInd + ", roles=" + roles
                 + "]";
     }
 }

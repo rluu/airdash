@@ -2,13 +2,13 @@
 
 Dashboard webapp that displays charts of air quality from a co2 monitoring device.
 
-#### Author
+## Author
 
 Ryan Luu
 
 ryanluu@gmail.com
 
-#### Setup details
+## Setup details
 
 First start a PostgreSQL server.  
 Here are steps I took to get it working from a VirtualBox install of Debian buster:
