@@ -62,20 +62,21 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //                .key(UUID.randomUUID().toString())
 //                .tokenValiditySeconds(1209600);
         
+
         http.authorizeRequests()
-                .antMatchers("/test/**").permitAll()
-                //.antMatchers("/login").permitAll()
-//                .antMatchers(
-//                        "/",
-//                        "/assets/**",
-//                        "/js/**",
-//                        "/css/**",
-//                        "/img/**",
-//                        "/webjars/**").permitAll()
+                .antMatchers("/login").permitAll()
+                //.antMatchers("/test/**").permitAll()
+                .antMatchers(
+                        "/",
+                        "/assets/**",
+                        "/js/**",
+                        "/css/**",
+                        "/img/**",
+                        "/webjars/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
              .formLogin()
-//                 .loginPage("/login")
+//                 .loginPage("/login")   // When this is commented out, it will use the default Spring login page.
                  .and()
              .httpBasic();
         

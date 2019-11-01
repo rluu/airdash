@@ -1,6 +1,9 @@
 package io.github.rluu.airdash.controller;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -10,14 +13,27 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/test")
 public class TestController {
 
+    private static final Logger logger = LogManager.getLogger(TestController.class);
+
 	@GetMapping("/userRoleMessage")
+	@PreAuthorize("hasAuthority('USER')")
 	public ResponseEntity<String> userRoleMessage() {
+	    logger.info("Inside userRoleMessage()");
 		return ResponseEntity.ok().body("Only visible to USER role owners!");
 	}
 	
 	@GetMapping("/adminRoleMessage")
+	@PreAuthorize("hasAuthority('ADMIN')")
 	public ResponseEntity<String> adminRoleMessage() {
+	    logger.info("Inside adminRoleMessage()");
 		return ResponseEntity.ok().body("Only visible to ADMIN role owners!");
+	}
+
+	@GetMapping("/allMessage")
+	@PreAuthorize("permitAll()") 
+	public ResponseEntity<String> allMessage() {
+	    logger.info("Inside allMessage()");
+		return ResponseEntity.ok().body("Visible to everyone!");
 	}
 
 }

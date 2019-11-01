@@ -7,6 +7,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import io.github.rluu.airdash.model.User;
 import io.github.rluu.airdash.repository.UserRepository;
@@ -20,10 +21,11 @@ public class CustomUserDetailsService implements UserDetailsService {
     private UserRepository userRepository;
 
     @Override
+    @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String username) {
-        logger.debug("Attempting to load username: " + username);
+        logger.info("Attempting to load username: " + username);
         User user = userRepository.findByUsername(username);
-        logger.debug("Done with query.  User found was: " + user);
+        logger.info("Done with query.  User found was: " + user);
         if (user == null) {
             throw new UsernameNotFoundException(username);
         }
