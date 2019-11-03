@@ -18,21 +18,21 @@ public class TestController {
 	@GetMapping("/userRoleMessage")
 	@PreAuthorize("hasAuthority('USER')")
 	public ResponseEntity<String> userRoleMessage() {
-	    logger.info("Inside userRoleMessage()");
+	    logger.trace("Inside userRoleMessage()");
 		return ResponseEntity.ok().body("Only visible to USER role owners!");
 	}
 	
 	@GetMapping("/adminRoleMessage")
 	@PreAuthorize("hasAuthority('ADMIN')")
 	public ResponseEntity<String> adminRoleMessage() {
-	    logger.info("Inside adminRoleMessage()");
+	    logger.trace("Inside adminRoleMessage()");
 		return ResponseEntity.ok().body("Only visible to ADMIN role owners!");
 	}
 
 	@GetMapping("/allMessage")
 	@PreAuthorize("permitAll()") 
 	public ResponseEntity<String> allMessage() {
-	    logger.info("Inside allMessage()");
+	    logger.trace("Inside allMessage()");
 		return ResponseEntity.ok().body("Visible to everyone!");
 	}
 

@@ -12,7 +12,7 @@ public class LoginController {
 
     @RequestMapping("/login")
     public String login() {
-        logger.info("Entered login method.");
+        logger.trace("Entered login method.");
         return "login.html";
     }
 }

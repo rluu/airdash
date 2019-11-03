@@ -22,20 +22,13 @@ public class AirdashApplication {
     private static final Logger logger = LogManager.getLogger(AirdashApplication.class);
 
     public static void main(String[] args) {
-        logger.trace("Trace Message!");
-        logger.debug("Debug Message!");
-        logger.info("Info Message!");
-        logger.warn("Warn Message!");
-        logger.error("Error Message!");
-        logger.fatal("Fatal Message!");
-
         SpringApplication.run(AirdashApplication.class, args);
 
-        logger.trace("Trace Message!");
-        logger.debug("Debug Message!");
-        logger.info("Info Message!");
-        logger.warn("Warn Message!");
-        logger.error("Error Message!");
-        logger.fatal("Fatal Message!");
+//        logger.trace("Trace Message!");
+//        logger.debug("Debug Message!");
+//        logger.info("Info Message!");
+//        logger.warn("Warn Message!");
+//        logger.error("Error Message!");
+//        logger.fatal("Fatal Message!");
     }
 }

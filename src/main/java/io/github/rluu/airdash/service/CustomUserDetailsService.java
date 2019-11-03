@@ -23,9 +23,9 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Override
     @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String username) {
-        logger.info("Attempting to load username: " + username);
+        logger.debug("Attempting to load username: " + username);
         User user = userRepository.findByUsername(username);
-        logger.info("Done with query.  User found was: " + user);
+        logger.debug("Done with query.  User found was: " + user);
         if (user == null) {
             throw new UsernameNotFoundException(username);
         }

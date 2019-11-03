@@ -24,39 +24,38 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-        logger.info("Inside authenticate()");
+        logger.trace("Inside authenticate()");
         
         String username = authentication.getName();
         String password = authentication.getCredentials().toString();
 
-        logger.info("username: " + username);
-        logger.info("password: " + password);
-
-        logger.info("customUserDetailsService: " + customUserDetailsService);
+        logger.debug("username: " + username);
+        logger.debug("password: " + password);
+        logger.debug("customUserDetailsService: " + customUserDetailsService);
 
         UserDetails userDetails = customUserDetailsService.loadUserByUsername(username);
-        logger.info("userDetails: " + userDetails);
+        logger.debug("userDetails: " + userDetails);
         
         if (userDetails instanceof User) {
             User user = (User)userDetails;
-            logger.info("user: " + user);
+            logger.debug("user: " + user);
         }
 
         if (username.equals(userDetails.getUsername()) && 
             password.equals(userDetails.getPassword())) {
             
-            logger.info("Login success");
+            logger.info("Login success for username: " + username);
             return new UsernamePasswordAuthenticationToken(username, password, userDetails.getAuthorities());
         }
         else {
-            logger.info("Login failure");
+            logger.info("Login failure for username: " + username);
             throw new BadCredentialsException("Authentication failed");
         }
     }
 
     @Override
     public boolean supports(Class<?> authentication) {
-        logger.info("Inside supports()");
+        logger.trace("Inside supports()");
         return authentication.equals(UsernamePasswordAuthenticationToken.class);
     }
 

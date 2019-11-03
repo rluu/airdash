@@ -14,6 +14,12 @@ configurations {
 	runtimeClasspath {
 		extendsFrom developmentOnly
 	}
+
+	// Logback is the default logging framework in Spring Boot. 
+	// Here we will exclude it so that we can use Log4j2 instead.
+	configurations {
+		compile.exclude module: 'spring-boot-starter-logging'
+	}
 }
 
 repositories {
@@ -23,7 +29,6 @@ repositories {
 ext {
 	set('springBootAdminVersion', "2.1.5")
     set('apacheCommonsLang3Version', "3.9")
-    set('log4jVersion', "2.12.1")
     set('postgresqlJdbcDriverVersion', "42.2.8")
 }
 
@@ -32,13 +37,12 @@ dependencies {
 	//implementation 'de.codecentric:spring-boot-admin-starter-client'
 
     implementation "org.apache.commons:commons-lang3:${apacheCommonsLang3Version}"
-    implementation "org.apache.logging.log4j:log4j-api:${log4jVersion}"
-    implementation "org.apache.logging.log4j:log4j-core:${log4jVersion}"
 
     implementation "org.postgresql:postgresql:${postgresqlJdbcDriverVersion}"
 
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-log4j2'
 	implementation 'org.springframework.boot:spring-boot-starter-mail'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
