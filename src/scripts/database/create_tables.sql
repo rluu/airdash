@@ -51,4 +51,59 @@ create table email_verification (
 	update_dttm		timestamp with time zone	not null,
 	delete_dttm		timestamp with time zone,
 	delete_ind		boolean 					not null	default false
-)
+);
+
+create table location (
+	location_id		bigint			primary key,
+	name			varchar			not null unique,
+	display_name	varchar			not null,
+	description		varchar			not null,
+	create_dttm		timestamp with time zone	not null,
+	update_dttm		timestamp with time zone	not null,
+	delete_dttm		timestamp with time zone,
+	delete_ind		boolean 					not null	default false
+);
+
+create table chart (
+	chart_id		bigint			primary key,
+	user_id			bigint			not null		references users(user_id),
+	location_id		bigint			not null		references location(location_id),
+	name			varchar,
+	description		varchar,
+	create_dttm		timestamp with time zone	not null,
+	update_dttm		timestamp with time zone	not null,
+	delete_dttm		timestamp with time zone,
+	delete_ind		boolean 					not null	default false
+);
+
+create table data_point_type (
+	data_point_type_id	bigint		primary key,
+	name			varchar			not null unique,
+	display_name	varchar			not null,
+	abbreviation	varchar			not null,
+	description		varchar			not null,
+	create_dttm		timestamp with time zone	not null,
+	update_dttm		timestamp with time zone	not null,
+	delete_dttm		timestamp with time zone,
+	delete_ind		boolean 					not null	default false
+);
+
+create table data_point (
+	data_point_id			bigint				primary key,
+	chart_id				bigint				not null	references chart(chart_id),
+	data_point_type_id		bigint				not null	references data_point_type(data_point_type_id),
+	value					double precision	not null,
+	acquire_dttm	timestamp with time zone	not null,
+	create_dttm		timestamp with time zone	not null,
+	update_dttm		timestamp with time zone	not null,
+	delete_dttm		timestamp with time zone,
+	delete_ind		boolean 					not null	default false
+);
+create index chart_id_idx on data_point
+(
+	chart_id
+);
+create index data_point_acquire_dttm_idx on data_point
+(
+	acquire_dttm
+);

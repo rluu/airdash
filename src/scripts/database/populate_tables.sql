@@ -18,7 +18,7 @@ INSERT INTO users
 		credentials_expired_ind,
 		enable_ind
 	)
-VALUES
+	VALUES
 	(
 		nextval('users_seq'),
 		'ryanadmin',
@@ -68,7 +68,7 @@ INSERT INTO ROLE
 		delete_dttm,
 		delete_ind
 	)
-VALUES 
+	VALUES 
 	(
 		nextval('role_seq'),
 		'ADMIN',
@@ -98,7 +98,7 @@ INSERT INTO users_role
 		delete_dttm,
 		delete_ind
 	)
-VALUES
+	VALUES
 	(
 		(SELECT user_id FROM users WHERE username = 'ryanadmin'),
 		(SELECT role_id FROM role WHERE name = 'ADMIN'),
@@ -115,3 +115,194 @@ VALUES
 		NULL,
 		false
 	);
+
+insert into location
+	(
+		location_id,
+		name,
+		display_name,
+		description,
+		create_dttm,
+		update_dttm,
+		delete_dttm,
+		delete_ind
+	)
+	values
+	(
+		nextval('location_seq'),
+		'HOME BEDROOM',
+		'Home Bedroom',
+		'',
+		CURRENT_TIMESTAMP,
+		CURRENT_TIMESTAMP,
+		null,
+		false
+	),
+	(
+		nextval('location_seq'),
+		'HOME OFFICE',
+		'Home Office',
+		'',
+		CURRENT_TIMESTAMP,
+		CURRENT_TIMESTAMP,
+		null,
+		false
+	),
+	(
+		nextval('location_seq'),
+		'HOME LIVING ROOM',
+		'Home Living Room',
+		'',
+		CURRENT_TIMESTAMP,
+		CURRENT_TIMESTAMP,
+		null,
+		false
+	),
+	(
+		nextval('location_seq'),
+		'HOME KITCHEN',
+		'Home Kitchen',
+		'',
+		CURRENT_TIMESTAMP,
+		CURRENT_TIMESTAMP,
+		null,
+		false
+	),
+	(
+		nextval('location_seq'),
+		'WORK OFFICE',
+		'Work Office',
+		'',
+		CURRENT_TIMESTAMP,
+		CURRENT_TIMESTAMP,
+		null,
+		false
+	),
+	(
+		nextval('location_seq'),
+		'OTHER',
+		'Other Location',
+		'Other undefined location.',
+		CURRENT_TIMESTAMP,
+		CURRENT_TIMESTAMP,
+		null,
+		false
+	);
+
+
+insert into chart 
+	(
+		chart_id,
+		user_id,
+		location_id,
+		name,
+		description,
+		create_dttm,
+		update_dttm,
+		delete_dttm,
+		delete_ind
+	)
+values
+	(
+		nextval('chart_seq'),
+		(SELECT user_id FROM users WHERE username = 'ryanuser'),
+		(SELECT location_id FROM location WHERE name = 'HOME BEDROOM'),
+		'Home Bedroom',
+		'',
+		CURRENT_TIMESTAMP,
+		CURRENT_TIMESTAMP,
+		null,
+		false
+	),
+	(
+		nextval('chart_seq'),
+		(SELECT user_id FROM users WHERE username = 'ryanuser'),
+		(SELECT location_id FROM location WHERE name = 'HOME OFFICE'),
+		'Home Office',
+		'',
+		CURRENT_TIMESTAMP,
+		CURRENT_TIMESTAMP,
+		null,
+		false
+	),
+	(
+		nextval('chart_seq'),
+		(SELECT user_id FROM users WHERE username = 'ryanuser'),
+		(SELECT location_id FROM location WHERE name = 'HOME LIVING ROOM'),
+		'Home Living Room',
+		'',
+		CURRENT_TIMESTAMP,
+		CURRENT_TIMESTAMP,
+		null,
+		false
+	),
+	(
+		nextval('chart_seq'),
+		(SELECT user_id FROM users WHERE username = 'ryanuser'),
+		(SELECT location_id FROM location WHERE name = 'HOME KITCHEN'),
+		'Home Kitchen',
+		'',
+		CURRENT_TIMESTAMP,
+		CURRENT_TIMESTAMP,
+		null,
+		false
+	),
+	(
+		nextval('chart_seq'),
+		(SELECT user_id FROM users WHERE username = 'ryanuser'),
+		(SELECT location_id FROM location WHERE name = 'WORK OFFICE'),
+		'Work Office',
+		'',
+		CURRENT_TIMESTAMP,
+		CURRENT_TIMESTAMP,
+		null,
+		false
+	),
+	(
+		nextval('chart_seq'),
+		(SELECT user_id FROM users WHERE username = 'ryanuser'),
+		(SELECT location_id FROM location WHERE name = 'OTHER'),
+		'Other',
+		'',
+		CURRENT_TIMESTAMP,
+		CURRENT_TIMESTAMP,
+		null,
+		false
+	);
+
+insert into data_point_type 
+	(
+		data_point_type_id,
+		name,
+		display_name,
+		abbreviation,
+		description,
+		create_dttm,
+		update_dttm,
+		delete_dttm,
+		delete_ind
+	)
+	values
+	(
+		nextval('data_point_type_seq'),
+		'TEMPERATURE CELCIUS',
+		'Temperature in Degrees Celcius',
+		'Temp. °C',
+		'',
+		CURRENT_TIMESTAMP,
+		CURRENT_TIMESTAMP,
+		null,
+		false
+	),
+	(
+		nextval('data_point_type_seq'),
+		'CARBON DIOXIDE PPM',
+		'Carbon Dioxide in PPM',
+		'CO₂ PPM',
+		'Carbon Dioxide in Parts Per Million',
+		CURRENT_TIMESTAMP,
+		CURRENT_TIMESTAMP,
+		null,
+		false
+	);
+

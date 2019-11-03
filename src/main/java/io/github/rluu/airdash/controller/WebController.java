@@ -6,9 +6,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class LoginController {
+public class WebController {
     
-    private static final Logger logger = LogManager.getLogger(LoginController.class);
+    private static final Logger logger = LogManager.getLogger(WebController.class);
+
+    @RequestMapping("/")
+    public String rootPath() {
+        logger.trace("Entered rootPath method.");
+        return "index.html";
+    }
 
     @RequestMapping("/login")
     public String login() {
