@@ -36,3 +36,6 @@ out/
 ### DBeaver eclipse plugin
 .dbeaver/
 
+# Python generated virtualenv environment.
+venv/
+

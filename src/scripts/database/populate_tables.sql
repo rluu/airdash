@@ -130,7 +130,7 @@ insert into location
 	values
 	(
 		nextval('location_seq'),
-		'HOME BEDROOM',
+		'HOME_BEDROOM',
 		'Home Bedroom',
 		'',
 		CURRENT_TIMESTAMP,
@@ -140,7 +140,7 @@ insert into location
 	),
 	(
 		nextval('location_seq'),
-		'HOME OFFICE',
+		'HOME_OFFICE',
 		'Home Office',
 		'',
 		CURRENT_TIMESTAMP,
@@ -150,7 +150,7 @@ insert into location
 	),
 	(
 		nextval('location_seq'),
-		'HOME LIVING ROOM',
+		'HOME_LIVING_ROOM',
 		'Home Living Room',
 		'',
 		CURRENT_TIMESTAMP,
@@ -160,7 +160,7 @@ insert into location
 	),
 	(
 		nextval('location_seq'),
-		'HOME KITCHEN',
+		'HOME_KITCHEN',
 		'Home Kitchen',
 		'',
 		CURRENT_TIMESTAMP,
@@ -170,7 +170,7 @@ insert into location
 	),
 	(
 		nextval('location_seq'),
-		'WORK OFFICE',
+		'WORK_OFFICE',
 		'Work Office',
 		'',
 		CURRENT_TIMESTAMP,
