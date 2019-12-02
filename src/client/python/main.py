@@ -132,6 +132,7 @@ username = None
 password = None
 serverUrl = None
 locationName = None
+readDataIntervalSeconds = None
 
 ##############################################################################
 
@@ -151,6 +152,13 @@ def main():
     assert password
     assert serverUrl
     assert locationName
+    assert readDataIntervalSeconds
+
+    log.debug("username: {}".format(username) +
+              ", password: <REDACTED>" +
+              ", serverUrl: {}".format(serverUrl) +
+              ", locationName: {}".format(locationName) +
+              ", readDataIntervalSeconds: {}".format(readDataIntervalSeconds))
 
     monitor = co2meter.CO2monitor()
 
@@ -160,16 +168,51 @@ def main():
     # {'product_name': 'USB-zyTemp', 'vendor_id': 1241, 'manufacturer': 'Holtek', 'serial_no': '1.40', 'product_id': 41042}
 
     while True:
-        print("Sleeping for 10 seconds ...")
-        time.sleep(10)
+        log.debug("Taking air measurements ...")
 
         # Example output of the monitor read_data() method:
         # >>> monitor.read_data()
         # (datetime.datetime(2019, 11, 18, 3, 5, 22), 551, 21.975000000000023)
         (dateTime, co2ppm, temperatureCelcius) = mon.read_data()
 
-        log.debug("dateTime: {}, co2ppm: {}, temperatureCelcius: {}".\
+        log.info("dateTime: {}, co2ppm: {}, temperatureCelcius: {}".\
                 format(dateTime, co2ppm, temperatureCelcius))
+
+        log.debug("dateTime in ISO 8601 format: " + dateTime.isoformat())
+
+        try:
+            with requests.Session() as session:
+                session.auth = (username, password)
+
+                data = {"timestamp" : dateTime.isoformat(),
+                        "co2ppm" : co2ppm,
+                        "temperatureCelcius" : temperatureCelcius}
+
+                log.debug("Making HTTP request to {}".format(serverUrl))
+
+                response = session.post(serverUrl, json=data, timeout=60)
+
+                log.debug("HTTP Response Code: {}".format(response.status_code))
+                log.debug("HTTP Response Headers: {}".format(response.headers))
+                log.debug("HTTP Response Body: {}".format(response.text))
+
+                response.raise_for_status()
+
+        except ConnectionError as connectionError:
+            log.error("{}".format(connectionError))
+
+        except Timeout as timeout:
+            log.error("{}".format(timeout))
+
+        except HTTPError as httpError:
+            log.error("{}".format(httpError))
+
+        except RequestException as requestException:
+            log.error("{}".format(requestException))
+
+        log.debug("Sleeping for {} seconds ...".\
+                format(readDataIntervalSeconds))
+        time.sleep(readDataIntervalSeconds)
 
 
 def parseCommandlineArgs():
@@ -196,6 +239,13 @@ def parseCommandlineArgs():
                       default=None,
                       metavar="<LOCATION_NAME>",
                       help="Sets the location which will be used when reporting CO2 and temperature information to the AirDash server.  For a list of possible values, please see the --list-locations option.  This is a required field.")
+    parser.add_option("--read-data-interval-seconds",
+                      action="store",
+                      type="int",
+                      dest="readDataIntervalSeconds",
+                      default=10,
+                      metavar="<SECONDS>",
+                      help="Sets the timing interval with which to read data from the device.  This is an optional field.")
 
     # Parse the arguments into options.
     (options, args) = parser.parse_args()
@@ -225,6 +275,14 @@ def parseCommandlineArgs():
     elif options.locationName in VALID_LOCATIONS:
         global locationName
         locationName = options.locationName
+
+    if options.readDataIntervalSeconds:
+        global readDataIntervalSeconds
+        readDataIntervalSeconds = options.readDataIntervalSeconds
+    else:
+        print("The read data interval provided was not valid.", file=sys.stderr)
+        shutdown(1)
+
 
     return (options, args)
 
