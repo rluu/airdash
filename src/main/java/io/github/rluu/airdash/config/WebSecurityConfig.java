@@ -65,6 +65,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.authorizeRequests()
                 .antMatchers("/").permitAll()
+                .antMatchers("/api/v1/dataPoint/test").permitAll()
+                .antMatchers("/api/v1/dataPoint/testPost").permitAll()
+                .antMatchers("/api/v1/dataPoint/create").permitAll()
                 .antMatchers("/login").permitAll()
                 //.antMatchers("/test/**").permitAll()
                 .antMatchers(
@@ -80,11 +83,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //                 .loginPage("/login")   // When this is commented out, it will use the default Spring login page.
                  .and()
              .httpBasic();
-        
-        
-        
-        
-        
     }
 
 //    

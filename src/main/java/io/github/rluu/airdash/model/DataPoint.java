@@ -13,7 +13,6 @@ import javax.persistence.Table;
 @Entity
 @Table(name="data_point")
 public class DataPoint {
-    
     @Id
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="data_point_seq")
     @SequenceGenerator(name="data_point_seq", sequenceName="data_point_seq")

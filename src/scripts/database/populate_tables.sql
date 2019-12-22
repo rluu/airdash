@@ -206,7 +206,7 @@ values
 	(
 		nextval('chart_seq'),
 		(SELECT user_id FROM users WHERE username = 'ryanuser'),
-		(SELECT location_id FROM location WHERE name = 'HOME BEDROOM'),
+		(SELECT location_id FROM location WHERE name = 'HOME_BEDROOM'),
 		'Home Bedroom',
 		'',
 		CURRENT_TIMESTAMP,
@@ -217,7 +217,7 @@ values
 	(
 		nextval('chart_seq'),
 		(SELECT user_id FROM users WHERE username = 'ryanuser'),
-		(SELECT location_id FROM location WHERE name = 'HOME OFFICE'),
+		(SELECT location_id FROM location WHERE name = 'HOME_OFFICE'),
 		'Home Office',
 		'',
 		CURRENT_TIMESTAMP,
@@ -228,7 +228,7 @@ values
 	(
 		nextval('chart_seq'),
 		(SELECT user_id FROM users WHERE username = 'ryanuser'),
-		(SELECT location_id FROM location WHERE name = 'HOME LIVING ROOM'),
+		(SELECT location_id FROM location WHERE name = 'HOME_LIVING_ROOM'),
 		'Home Living Room',
 		'',
 		CURRENT_TIMESTAMP,
@@ -239,7 +239,7 @@ values
 	(
 		nextval('chart_seq'),
 		(SELECT user_id FROM users WHERE username = 'ryanuser'),
-		(SELECT location_id FROM location WHERE name = 'HOME KITCHEN'),
+		(SELECT location_id FROM location WHERE name = 'HOME_KITCHEN'),
 		'Home Kitchen',
 		'',
 		CURRENT_TIMESTAMP,
@@ -250,7 +250,7 @@ values
 	(
 		nextval('chart_seq'),
 		(SELECT user_id FROM users WHERE username = 'ryanuser'),
-		(SELECT location_id FROM location WHERE name = 'WORK OFFICE'),
+		(SELECT location_id FROM location WHERE name = 'WORK_OFFICE'),
 		'Work Office',
 		'',
 		CURRENT_TIMESTAMP,
@@ -285,7 +285,7 @@ insert into data_point_type
 	values
 	(
 		nextval('data_point_type_seq'),
-		'TEMPERATURE CELCIUS',
+		'TEMPERATURE_CELCIUS',
 		'Temperature in Degrees Celcius',
 		'Temp. °C',
 		'',
@@ -296,7 +296,7 @@ insert into data_point_type
 	),
 	(
 		nextval('data_point_type_seq'),
-		'CARBON DIOXIDE PPM',
+		'CARBON_DIOXIDE_PPM',
 		'Carbon Dioxide in PPM',
 		'CO₂ PPM',
 		'Carbon Dioxide in Parts Per Million',
